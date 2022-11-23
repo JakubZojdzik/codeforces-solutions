@@ -32,8 +32,6 @@ typedef vector<pair<long long, long long>> vpll;
 
 int a[300007];
 int dp[300007];
-bitset<207> bylo;
-vi kraw[300007];
 
 int main()
 {
@@ -44,40 +42,26 @@ int main()
     cin >> t;
     rep(T, 1, t)
     {
-        bylo.reset();
         int n;
         cin >> n;
         rep(i, 0, n-1)
         {
             cin >> a[i];
-            kraw[i].clear();
-            dp[i] = 0;
-        }
-        rep(i, 0, 199)
-        {
-            rep(j, i+1, 200)
-            {
-                if((a[i] ^ j) < (a[j] ^ i))
-                {
-                    kraw[j].pb(i);
-                    // cout << i << " -> " << j << '\n';
-                }
-            }
-        }
-        int w = 0;
-        rep(i, 0, 200)
-        {
-            if(i > n-1) continue;
             dp[i] = 1;
-            rep(j, 0, sz(kraw[i])-1)
+        }
+        
+        int w = 0;
+        rep(i, 0, n-1)
+        {
+            for(int j = max(0LL, i-520); j < i; j++)
             {
-                dp[i] = max(dp[i], dp[kraw[i][j]] + 1);
+                if((a[j]^i) < (a[i]^j)) dp[i] = max(dp[i], dp[j]+1);
             }
             w = max(dp[i], w);
         }
+
         cout << w << '\n';
     }
-
 }
 
 /*
