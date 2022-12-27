@@ -1,6 +1,6 @@
 /*
     Jakub Żojdzik
-    23-11-2022
+    27-12-2022
 */
 
 #include <bits/stdc++.h>
@@ -30,8 +30,7 @@ typedef vector<pair<long long, long long>> vpll;
 #define sz(x) (ll)(x).size()
 #define nl cout << '\n'
 
-int a[300007];
-int dp[300007];
+ll tab[1000007];
 
 int main()
 {
@@ -42,51 +41,40 @@ int main()
     cin >> t;
     rep(T, 1, t)
     {
-        int n;
-        cin >> n;
-        rep(i, 0, n-1)
+        ll n, m, k;
+        cin >> n >> m >> k;
+        ll temp;
+        bool ok = 1;
+        for(ll i = 0; i < m; i++)
         {
-            cin >> a[i];
-            dp[i] = 1;
+            cin >> tab[i];
+            tab[i] = -tab[i];
         }
-        int w = 0;
-        rep(i, 0, n-1)
+        sort(tab, tab+m);
+        if(m < k)
         {
-            for(int j = max(0LL, i-520); j < i; j++)
-                if((a[j]^i) < (a[i]^j)) dp[i] = max(dp[i], dp[j]+1);
-            w = max(dp[i], w);
+            cout << "NO\n";
+            continue;
         }
-
-        cout << w << '\n';
+        for(int i = 0; i < m; i++)
+        {
+            temp = n / k;
+            if(n % k)
+            {
+                n--;
+                temp++;
+            }
+            if(temp < -tab[i]) ok = 0;
+        }
+        if(ok) cout << "YES\n";
+        else cout << "NO\n";
     }
 }
 
 /*
-1
 2
-1 2
-
-1
-5
-5 2 4 3 1
-
-0 1 2 3 4
-1: 1
-2: 2
-3: 2
-4: 3
-5: 3
-
-
-1
-10
-9 2 1 1 2 5 2 10 3 3
-odp: 7
-
-
-9  2  1  1  2  5  2  10  3  3
-
-1  2  3  5  9  10
-
-1  1  2  4  1  1
+12 6 2
+1 1 1 1 1 7
+12 6 2
+2 2 2 2 2 2
 */

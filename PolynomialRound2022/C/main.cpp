@@ -1,6 +1,6 @@
 /*
     Jakub Żojdzik
-    23-11-2022
+    27-12-2022
 */
 
 #include <bits/stdc++.h>
@@ -30,9 +30,6 @@ typedef vector<pair<long long, long long>> vpll;
 #define sz(x) (ll)(x).size()
 #define nl cout << '\n'
 
-int a[300007];
-int dp[300007];
-
 int main()
 {
     cout.tie(0);
@@ -43,50 +40,25 @@ int main()
     rep(T, 1, t)
     {
         int n;
-        cin >> n;
-        rep(i, 0, n-1)
-        {
-            cin >> a[i];
-            dp[i] = 1;
-        }
-        int w = 0;
-        rep(i, 0, n-1)
-        {
-            for(int j = max(0LL, i-520); j < i; j++)
-                if((a[j]^i) < (a[i]^j)) dp[i] = max(dp[i], dp[j]+1);
-            w = max(dp[i], w);
-        }
+        string s;
+        cin >> n >> s;
 
-        cout << w << '\n';
+        int akt = 1;
+        for(int i = 0; i < n-1; i++)
+        {
+            if(i == 0 || s[i] != s[i-1]) akt = 1;
+            else akt++;
+
+            cout << i - akt + 2 << ' ';
+        }
+        nl;
     }
 }
 
 /*
-1
 2
-1 2
-
-1
-5
-5 2 4 3 1
-
-0 1 2 3 4
-1: 1
-2: 2
-3: 2
-4: 3
-5: 3
-
-
-1
-10
-9 2 1 1 2 5 2 10 3 3
-odp: 7
-
-
-9  2  1  1  2  5  2  10  3  3
-
-1  2  3  5  9  10
-
-1  1  2  4  1  1
+4
+001
+4
+101
 */
