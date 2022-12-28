@@ -1,0 +1,4 @@
+# executables
+*/main
+*/*.out
+.vscode
