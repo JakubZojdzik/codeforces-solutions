@@ -112,7 +112,7 @@ int main()
         int akt = a2[i];
         while(akt != 1)
         {
-            if(tree1[akt]) break;
+            if(tree2[akt]) break;
             tree2[akt] = 1;
             akt = parent[akt];
         }
