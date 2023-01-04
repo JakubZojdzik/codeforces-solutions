@@ -42,7 +42,7 @@ int main()
     int t;
     cin >> t;
 
-    for(int i = 0; i * i <= 10; i++)
+    for(int i = 0; i * i <= 200007; i++)
     {
         kwad.pb(i*i);
     }
