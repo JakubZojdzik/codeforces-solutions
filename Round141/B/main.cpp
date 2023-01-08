@@ -1,6 +1,6 @@
 /*
     Jakub Żojdzik
-    04-01-2023
+    08-01-2023
 */
 
 #include <bits/stdc++.h>
@@ -30,8 +30,6 @@ typedef vector<pair<long long, long long>> vpll;
 #define sz(x) (ll)(x).size()
 #define nl cout << '\n'
 
-ll a[200007];
-
 int main()
 {
     cout.tie(0);
@@ -41,27 +39,37 @@ int main()
     cin >> t;
     rep(T, 1, t)
     {
-        int n, m;
-        cin >> n >> m;
+        int n;
+        cin >> n;
+        vi num;
+        for(int i = 1; i <= (n*n)/2; i++)
+        {
+            num.pb(i);
+            num.pb(n*n-i+1);
+        }
+        if(n % 2 == 1) num.pb((n*n)/2+1);
+
         for(int i = 0; i < n; i++)
         {
-            cin >> a[i];
+            if(i % 2 == 1)
+            {
+                for(int j = i*n; j < i*n+n; j++)
+                {
+                    cout << num[j] << " ";
+                }
+            }
+            else
+            {
+                for(int j = i*n+n-1; j >= i*n; j--)
+                {
+                    cout << num[j] << " ";
+                }
+            }
+            nl;
         }
-        priority_queue<pll> pq;
-        for(int i = m-1; i > 0; i--)
-        {
-            pq.push({a[i], i});
-        }
-        ll sum = 0;
-        for(int i = m; i >= 0; i--)
-        {
-            sum += a[i];
-        }
-
     }
 }
 
 /*
-1, 2, -4, -6, 1, -1, 10
-1, 3, -1, -7, -6, -7, 2
+
 */
